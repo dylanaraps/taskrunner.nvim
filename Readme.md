@@ -6,6 +6,14 @@ The plugin works best with [Vim-rooter](https://github.com/airblade/vim-rooter) 
 
 The plugin only works with Neovim because it makes use of neovim's built in terminal splits to create the taskrunner split.
 
+## Installation
+
+Use your favorite plugin manager.
+
+- [vim-plug](https://github.com/junegunn/vim-plug)
+  1. Add `Plug 'dylanaraps/taskrunner.nvim'` to your .nvimrc
+  2. Run `:PlugInstall`
+
 ## Options
 
 ```vimL
@@ -58,12 +66,3 @@ You can also change whether the split will open to the left/right or top/bottom
 	let g:taskrunner#split_direction == "nosplitbelow splitright"
 
 ```
-
-## Installation
-
-Use your favorite plugin manager.
-
-- [vim-plug](https://github.com/junegunn/vim-plug)
-  1. Add `Plug 'dylanaraps/taskrunner.nvim'` to your .nvimrc
-  2. Run `:PlugInstall`
-
