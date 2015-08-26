@@ -16,7 +16,7 @@ if !exists("g:taskrunner#split")
 endif
 
 if !exists("g:taskrunner#split_direction")
-	let g:taskrunner#split_direction == "splitbelow splitright"
+	let g:taskrunner#split_direction = "splitbelow splitright"
 endif
 
 " Find Taskrunner {{{
