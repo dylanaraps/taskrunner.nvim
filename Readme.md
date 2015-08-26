@@ -20,9 +20,9 @@ Use your favorite plugin manager.
 
 ```vimL
 	" Command Example
-	" the command on it's own will look in the open file's current working directory,
-	" detect gulp/grunt and run the default task.
-	:Task
+	" The command on it's own will look in the open file's current working directory.
+	" If left blank the command will use the 'default' task.
+	:Task taskname
 
 	" More Command Examples:
 	" You can also use all of gulp/grunt's cmdline flags!
@@ -38,7 +38,8 @@ The plugin will try and find out whether or not you're using gulp/grunt by check
 	let g:taskrunner = "gulp"
 ```
 
-You can also change how the terminal split will be opened. Again add this to your .nvimrc to change the size/location of the split.
+### Size of the split
+Default: `let g:taskrunner#split = "10new"`
 
 ```vimL
 	" taskrunner split size/position
@@ -50,21 +51,38 @@ You can also change how the terminal split will be opened. Again add this to you
 	let g:taskrunner#split = "30vnew"
 ```
 
-You can also change whether the split will open to the left/right or top/bottom
+### Split Direction
+Default: `let g:taskrunner#split_direction = "splitbelow splitright"`
 
 ```vimL
 	" Split Direction
 
 	" Sets split to open to the bottom and right
-	let g:taskrunner#split_direction == "splitbelow splitright"
+	let g:taskrunner#split_direction = "splitbelow splitright"
 
 	" left/top
-	let g:taskrunner#split_direction == "nosplitbelow nosplitright"
+	let g:taskrunner#split_direction = "nosplitbelow nosplitright"
 
 	" top
-	let g:taskrunner#split_direction == "nosplitbelow"
+	let g:taskrunner#split_direction = "nosplitbelow"
 
 	" top/right
-	let g:taskrunner#split_direction == "nosplitbelow splitright"
+	let g:taskrunner#split_direction = "nosplitbelow splitright"
 
+```
+
+### Unlisted
+Default: `let g:taskrunner#unlisted = 1`
+
+```vimL
+	" Hide the buffer from the buffer list.
+	let g:taskrunner#unlisted = 1
+```
+
+### Focus On Open
+Default: `let g:taskrunner#focus_on_open = 1`
+
+```vimL
+	" Focus on open
+	let g:taskrunner#focus_on_open = 1
 ```

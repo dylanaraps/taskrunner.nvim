@@ -19,6 +19,14 @@ if !exists("g:taskrunner#split_direction")
 	let g:taskrunner#split_direction = "splitbelow splitright"
 endif
 
+if !exists("g:taskrunner#unlisted")
+	let g:taskrunner#unlisted = 1
+endif
+
+if !exists("g:taskrunner#focus_on_open")
+	let g:taskrunner#focus_on_open = 1
+endif
+
 " Find Taskrunner {{{
 
 function! FindTaskRunner()
@@ -50,7 +58,14 @@ function! RunTask(command)
 			execute "setlocal" . " " . g:taskrunner#split_direction
 			execute g:taskrunner#split
 			call termopen(g:taskrunner . " " . a:command)
-			wincmd w
+
+			if g:taskrunner#unlisted == 1
+				setlocal nobuflisted
+			endif
+
+			if g:taskrunner#focus_on_open == 1
+				wincmd w
+			endif
 
 		endif
 	else
