@@ -1,10 +1,10 @@
 # taskrunner.nvim
 
-taskrunner is a simple plugin for Neovim that adds a :Task cmd that runs gulp/grunt in a terminal split. It supports gulp/grunt's cmdline flags:
+taskrunner is a simple plugin for Neovim that adds a :Task cmd that runs gulp/grunt in a terminal split.
+
+The plugin only works with Neovim because it makes use of neovim's built in terminal splits to create the taskrunner split. If installed in regular vim the plugin won't do anything.
 
 The plugin works best with [Vim-rooter](https://github.com/airblade/vim-rooter) which sets the current working directory of the files you open to the nearest .git folder. You can also configure Vim-Rooter to set your working directory to the nearest gulp/gruntfile!
-
-The plugin only works with Neovim because it makes use of neovim's built in terminal splits to create the taskrunner split.
 
 ![Gulp](https://raw.githubusercontent.com/dylanaraps/taskrunner.nvim/master/screenshots/gulp.png)
 
@@ -18,6 +18,7 @@ Use your favorite plugin manager.
 
 ## Options
 
+### :Task
 ```vimL
 	" Command Example
 	" The command on it's own will look in the open file's current working directory.
