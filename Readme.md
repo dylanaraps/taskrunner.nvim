@@ -2,9 +2,9 @@
 
 taskrunner is a simple plugin for Neovim that adds a :Task cmd that runs gulp/grunt in a terminal split.
 
-The plugin only works with Neovim because it makes use of neovim's built in terminal splits to create the taskrunner split. If installed in regular vim the plugin won't do anything.
+The plugin by default will look for your gulp/gruntfile in your current working directory. If no taskrunner file is found it'll look up a directory 5 times. If you don't like/want this to happen, there's an option below to look through more directories and to disable this.
 
-The plugin works best with [Vim-rooter](https://github.com/airblade/vim-rooter) which sets the current working directory of the files you open to the nearest .git folder. You can also configure Vim-Rooter to set your working directory to the nearest gulp/gruntfile!
+The plugin only works with Neovim because it makes use of neovim's built in terminal splits to create the taskrunner split. If installed in regular vim the plugin won't do anything.
 
 ![Gulp](https://raw.githubusercontent.com/dylanaraps/taskrunner.nvim/master/screenshots/gulp.png)
 
@@ -32,7 +32,21 @@ Use your favorite plugin manager.
 	:Task --no-color
 ```
 
-The plugin will try and find out whether or not you're using gulp/grunt by checking to see if a taskfile exists in your :pwd. If the plugin fails you can manually set it by adding this to your .nvimrc.
+### Number of directories to go up
+The plugin by default will look up 5 directories from the open file's location to locate a gulp/gruntfile.
+
+```vimL
+	" Change directories to go up
+
+	" Look up 5 directories if file isn't found in :pwd
+	let g:taskrunner#dirs_to_go_up = 5
+
+	" You can disable this behavior by changing the value to a "1" or a "0"
+	let g:taskrunner#dirs_to_go_up = 1
+
+```
+
+### Manually set task runner
 
 ```vimL
 	" Manually set taskrunner

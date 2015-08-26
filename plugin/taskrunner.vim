@@ -11,6 +11,10 @@ if !exists("g:taskrunner")
 	let g:taskrunner = "gulp"
 endif
 
+if !exists("g:taskrunner#dirs_to_go_up")
+	let g:taskrunner#dirs_to_go_up = 5
+endif
+
 if !exists("g:taskrunner#split")
 	let g:taskrunner#split = "10new"
 endif
@@ -29,7 +33,9 @@ endif
 
 " Find Taskrunner {{{
 
-function! FindTaskRunner()
+" Looks for a taskrunner in the current file's directory.
+" if no task file is found it then checks up a directory for a task file.
+function! SearchDir()
 	if !empty(glob("gulpfile.js")) || !empty(glob("gulpfile.coffee"))
 		let g:taskrunner = "gulp"
 
@@ -37,9 +43,18 @@ function! FindTaskRunner()
 		let g:taskrunner = "grunt"
 
 	else
+		lcd ..
 		let g:taskrunner = "none"
 
 	endif
+
+endfunction
+
+function! FindTaskRunner()
+	" Go up directories if no task file found
+	for i in range(1,g:taskrunner#dirs_to_go_up)
+		call SearchDir()
+	endfor
 endfunction
 
 " }}}
