@@ -6,6 +6,8 @@ The plugin works best with [Vim-rooter](https://github.com/airblade/vim-rooter) 
 
 The plugin only works with Neovim because it makes use of neovim's built in terminal splits to create the taskrunner split.
 
+![Gulp](https://raw.githubusercontent.com/dylanaraps/taskrunner.nvim/master/screenshots/gulp.png)
+
 ## Installation
 
 Use your favorite plugin manager.

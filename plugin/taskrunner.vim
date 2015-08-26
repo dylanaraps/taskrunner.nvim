@@ -47,7 +47,7 @@ function! RunTask(command)
 			echom "You can also point to the file like so :Task --gulpfile path/to/gulpfile.js task"
 
 		else
-			execute setlocal g:taskrunner#split_direction
+			execute "setlocal" . " " . g:taskrunner#split_direction
 			execute g:taskrunner#split
 			call termopen(g:taskrunner . " " . a:command)
 			wincmd w
