@@ -32,6 +32,21 @@ Use your favorite plugin manager.
 	:Task --no-color
 ```
 
+### Manually set task runner
+Default: `let g:taskrunner#auto = 1`
+
+To manually set the task runner you need to change two values. The first option is `g:taskrunner#auto` which enables/disables auto detection of grunt/gulp. The second option `g:taskrunner` manually defines the taskrunner to look for and can be either grunt or gulp.
+
+```vimL
+	" Manually set taskrunner
+
+	" Disable auto detection of Grunt/Gulp
+	let g:taskrunner#auto = 0
+
+	" Manually define task runner
+	let g:taskrunner = "gulp"
+```
+
 ### Number of directories to go up
 The plugin by default will look up 5 directories from the open file's location to locate a gulp/gruntfile.
 
@@ -44,21 +59,6 @@ The plugin by default will look up 5 directories from the open file's location t
 	" You can disable this behavior by changing the value to a "1" or a "0"
 	let g:taskrunner#dirs_to_go_up = 1
 
-```
-
-### Manually set task runner
-Default: `let g:taskrunner#auto = 1`
-
-To manually set the task runner you need to change two values. The first option is `g:taskrunner#auto` which enables/disables auto detection of grunt/gulp. The second option `g:taskrunner` manually defines the taskrunner to look for and can be either grunt or gulp.
-
-```vimL
-	" Manually set taskrunner
-
-	" Disable auto detection of Grunt/Gulp
-	let g:taskrunner#auto = 1
-
-	" Manually define task runner
-	let g:taskrunner = "gulp"
 ```
 
 ### Size of the split
