@@ -5,8 +5,14 @@ taskrunner is a simple plugin for Neovim that adds a :Task cmd that runs gulp/gr
 The plugin works best with [Vim-rooter](https://github.com/airblade/vim-rooter) which sets the current working directory of the files you open to the nearest .git folder. You can also configure the plugin to set your working directory to the nearest gulp/gruntfile!
 
 ```vimL
-	" Command Examples:
-	:Task --gulpfile ~/projects/gulpfile.coffee
+	" Command Example
+	" the command on it's own will look in the open file's current working directory,
+	" detect gulp/grunt and run the default task.
+	:Task
+
+	" More Command Examples:
+	" You can also use all of gulp/grunt's cmdline flags!
+	:Task --gulpfile ~/projects/gulpfile.coffee coffeescript
 	:Task --cwd ~/projects/startpage/
 	:Task --no-color
 ```
