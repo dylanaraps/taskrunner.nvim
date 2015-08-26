@@ -4,7 +4,7 @@ taskrunner is a simple plugin for Neovim that adds a :Task cmd that runs gulp/gr
 
 The plugin by default will look for your gulp/gruntfile in your current working directory. If no taskrunner file is found it'll look up a directory 5 times. If you don't like/want this to happen, there's an option below to look through more directories and to disable this.
 
-The plugin only works with Neovim because it makes use of neovim's built in terminal splits to create the taskrunner split. If installed in regular vim the plugin won't do anything.
+The plugin only works with Neovim because it makes use of neovim's built in terminal splits to create the taskrunner split. If installed in regular vim the plugin won't do anything. So it's fine to install in a .vimrc used in both vim/nvim.
 
 ![Gulp](https://raw.githubusercontent.com/dylanaraps/taskrunner.nvim/master/screenshots/gulp.png)
 
@@ -47,9 +47,17 @@ The plugin by default will look up 5 directories from the open file's location t
 ```
 
 ### Manually set task runner
+Default: `let g:taskrunner#auto = 1`
+
+To manually set the task runner you need to change two values. The first option is `g:taskrunner#auto` which enables/disables auto detection of grunt/gulp. The second option `g:taskrunner` manually defines the taskrunner to look for and can be either grunt or gulp.
 
 ```vimL
 	" Manually set taskrunner
+
+	" Disable auto detection of Grunt/Gulp
+	let g:taskrunner#auto = 1
+
+	" Manually define task runner
 	let g:taskrunner = "gulp"
 ```
 

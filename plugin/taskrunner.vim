@@ -11,6 +11,10 @@ if !exists("g:taskrunner")
 	let g:taskrunner = "gulp"
 endif
 
+if !exists("g:taskrunner#auto")
+	let g:taskrunner#auto = 1
+endif
+
 if !exists("g:taskrunner#dirs_to_go_up")
 	let g:taskrunner#dirs_to_go_up = 5
 endif
@@ -36,18 +40,38 @@ endif
 " Looks for a taskrunner in the current file's directory.
 " if no task file is found it then checks up a directory for a task file.
 function! SearchDir()
-	if !empty(glob("gulpfile.js")) || !empty(glob("gulpfile.coffee"))
-		let g:taskrunner = "gulp"
+	if g:taskrunner#auto == 1
+		if !empty(glob("gulpfile.js")) || !empty(glob("gulpfile.coffee"))
+			let g:taskrunner = "gulp"
 
-	elseif !empty(glob("gruntfile.js")) || !empty(glob("gruntfile.coffee"))
-		let g:taskrunner = "grunt"
+		elseif !empty(glob("gruntfile.js")) || !empty(glob("gruntfile.coffee"))
+			let g:taskrunner = "grunt"
 
-	else
-		lcd ..
-		let g:taskrunner = "none"
+		else
+			lcd ..
+			let g:taskrunner = "none"
 
-	endif
+		endif
 
+	elseif g:taskrunner#auto == 0 && g:taskrunner == "gulp"
+		if !empty(glob("gulpfile.js")) || !empty(glob("gulpfile.coffee"))
+			let g:taskrunner = "gulp"
+
+		else
+			lcd ..
+			let g:taskrunner = "none"
+
+		endif
+
+	elseif g:taskrunner#auto == 0 && g:taskrunner == "grunt"
+		elseif !empty(glob("gruntfile.js")) || !empty(glob("gruntfile.coffee"))
+			let g:taskrunner = "grunt"
+
+		else
+			lcd ..
+			let g:taskrunner = "none"
+
+		endif
 endfunction
 
 function! FindTaskRunner()
