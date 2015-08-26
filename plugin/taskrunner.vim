@@ -28,7 +28,7 @@ if !exists("g:taskrunner#unlisted")
 endif
 
 if !exists("g:taskrunner#focus_on_open")
-	let g:taskrunner#focus_on_open = 1
+	let g:taskrunner#focus_on_open = 0
 endif
 
 " Find Taskrunner {{{
@@ -78,7 +78,7 @@ function! RunTask(command)
 				setlocal nobuflisted
 			endif
 
-			if g:taskrunner#focus_on_open == 1
+			if g:taskrunner#focus_on_open == 0
 				wincmd w
 			endif
 

@@ -95,7 +95,7 @@ Default: `let g:taskrunner#unlisted = 1`
 ```
 
 ### Focus On Open
-Default: `let g:taskrunner#focus_on_open = 1`
+Default: `let g:taskrunner#focus_on_open = 0`
 
 ```vimL
 	" Focus on open
