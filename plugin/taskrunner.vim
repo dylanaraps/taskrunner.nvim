@@ -43,34 +43,27 @@ function! SearchDir()
 	if g:taskrunner#auto == 1
 		if !empty(glob("gulpfile.js")) || !empty(glob("gulpfile.coffee"))
 			let g:taskrunner = "gulp"
-
 		elseif !empty(glob("gruntfile.js")) || !empty(glob("gruntfile.coffee"))
 			let g:taskrunner = "grunt"
-
 		else
 			lcd ..
 			let g:taskrunner = "none"
-
 		endif
 
 	elseif g:taskrunner#auto == 0 && g:taskrunner == "gulp"
 		if !empty(glob("gulpfile.js")) || !empty(glob("gulpfile.coffee"))
 			let g:taskrunner = "gulp"
-
 		else
 			lcd ..
 			let g:taskrunner = "none"
-
 		endif
 
 	elseif g:taskrunner#auto == 0 && g:taskrunner == "grunt"
 		elseif !empty(glob("gruntfile.js")) || !empty(glob("gruntfile.coffee"))
 			let g:taskrunner = "grunt"
-
 		else
 			lcd ..
 			let g:taskrunner = "none"
-
 		endif
 endfunction
 
@@ -92,7 +85,6 @@ function! RunTask(command)
 		if g:taskrunner == "none"
 			echom "No taskrunner file found"
 			echom "You can also point to the file like so :Task --gulpfile path/to/gulpfile.js task"
-
 		else
 			execute "setlocal" . " " . g:taskrunner#split_direction
 			execute g:taskrunner#split
@@ -105,7 +97,6 @@ function! RunTask(command)
 			if g:taskrunner#focus_on_open == 0
 				wincmd w
 			endif
-
 		endif
 	else
 		echom "taskrunner.nvim only works with neovim"
