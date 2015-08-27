@@ -8,15 +8,11 @@ endif
 let g:loaded_taskrunner = 1
 
 if !exists("g:taskrunner")
-	let g:taskrunner = "gulp"
+	let g:taskrunner = "auto"
 endif
 
-if !exists("g:taskrunner#auto")
-	let g:taskrunner#auto = 1
-endif
-
-if !exists("g:taskrunner#dirs_to_go_up")
-	let g:taskrunner#dirs_to_go_up = 5
+if !exists("g:taskrunner#cmd")
+	let g:taskrunner#cmd = "default"
 endif
 
 if !exists("g:taskrunner#split")
@@ -39,39 +35,33 @@ endif
 
 " Looks for a taskrunner in the current file's directory.
 " if no task file is found it then checks up a directory for a task file.
-function! SearchDir()
-	if g:taskrunner#auto == 1
-		if !empty(glob("gulpfile.js")) || !empty(glob("gulpfile.coffee"))
-			let g:taskrunner = "gulp"
-		elseif !empty(glob("gruntfile.js")) || !empty(glob("gruntfile.coffee"))
-			let g:taskrunner = "grunt"
-		else
-			lcd ..
-			let g:taskrunner = "none"
-		endif
-
-	elseif g:taskrunner#auto == 0 && g:taskrunner == "gulp"
-		if !empty(glob("gulpfile.js")) || !empty(glob("gulpfile.coffee"))
-			let g:taskrunner = "gulp"
-		else
-			lcd ..
-			let g:taskrunner = "none"
-		endif
-
-	elseif g:taskrunner#auto == 0 && g:taskrunner == "grunt"
-		elseif !empty(glob("gruntfile.js")) || !empty(glob("gruntfile.coffee"))
-			let g:taskrunner = "grunt"
-		else
-			lcd ..
-			let g:taskrunner = "none"
-		endif
-endfunction
-
 function! FindTaskRunner()
-	" Go up directories if no task file found
-	for i in range(1,g:taskrunner#dirs_to_go_up)
-		call SearchDir()
+	lcd %:p:h
+	let taskrunnerfilelist = ['gulpfile.js', 'gulpfile.coffee', 'gruntfile.js', 'gruntfile.coffee']
+
+	" Searches using the above list for a task file and goes up a directory
+	" if it fails to find anything.
+	for taskrunnerfile in taskrunnerfilelist
+		let taskrunner = findfile(taskrunnerfile, ".;")
+
+		" If taskrunner isn't blank stop looping.
+		" (This avoids getting multiple results)
+		if taskrunner != ""
+			break
+		endif
 	endfor
+
+	" findfile() returns the full path, this line uses a regexp to cut away
+	" the path and only show the file name.
+	let taskfile = matchstr(taskrunner, '\(gulp\|grunt\)file\.\(js\|coffee\)')
+
+	if taskfile == "gulpfile.js" || taskfile == "gulpfile.coffee"
+		let g:taskrunner = "gulp"
+	elseif taskfile == "gruntfile.js" || taskfile == "gruntfile.coffee"
+		let g:taskrunner = "grunt"
+	else
+		let g:taskrunner = "none"
+	endif
 endfunction
 
 " }}}
@@ -88,7 +78,12 @@ function! RunTask(command)
 		else
 			execute "setlocal" . " " . g:taskrunner#split_direction
 			execute g:taskrunner#split
-			call termopen(g:taskrunner . " " . a:command)
+
+			if g:taskrunner#cmd == "default"
+				call termopen(g:taskrunner . " " . a:command)
+			else
+				call termopen(g:taskrunner#cmd . " " . a:command)
+			endif
 
 			if g:taskrunner#unlisted == 1
 				setlocal nobuflisted

@@ -2,7 +2,7 @@
 
 taskrunner is a simple plugin for Neovim that adds a :Task cmd that runs gulp/grunt in a terminal split.
 
-The plugin by default will look for your gulp/gruntfile in your current working directory. If no taskrunner file is found it'll look up a directory 5 times. If you don't like/want this to happen, there's an option below to look through more directories and to disable this.
+The plugin by default will look for your gulp/gruntfile in your current working directory. If no taskrunner file is found it'll keep looking up a directory.
 
 The plugin only works with Neovim because it makes use of neovim's built in terminal splits to create the taskrunner split. If installed in regular vim the plugin won't do anything. So it's fine to install in a .vimrc used in both vim/nvim.
 
@@ -32,34 +32,17 @@ Use your favorite plugin manager.
 	:Task --no-color
 ```
 
-### Manually set task runner
-Default: `let g:taskrunner#auto = 1`
-
-To manually set the task runner you need to change two values. The first option is `g:taskrunner#auto` which enables/disables auto detection of grunt/gulp. The second option `g:taskrunner` manually defines the taskrunner to look for and can be either grunt or gulp.
+### Command to use to launch taskrunner
+Default: `let g:taskrunner#cmd = "default"`
 
 ```vimL
-	" Manually set taskrunner
-
-	" Disable auto detection of Grunt/Gulp
-	let g:taskrunner#auto = 0
-
-	" Manually define task runner
-	let g:taskrunner = "gulp"
+	" Custom launch command for gulp
+	let g:taskrunner#cmd = "gulp --no-color"
 ```
 
-### Number of directories to go up
-The plugin by default will look up 5 directories from the open file's location to locate a gulp/gruntfile.
-
-```vimL
-	" Change directories to go up
-
-	" Look up 5 directories if file isn't found in :pwd
-	let g:taskrunner#dirs_to_go_up = 5
-
-	" You can disable this behavior by changing the value to a "1" or a "0"
-	let g:taskrunner#dirs_to_go_up = 1
-
-```
+When left default the plugin will launch the task runners with their default command:
+* Gulp: `gulp`
+* Grunt: `grunt`
 
 ### Size of the split
 Default: `let g:taskrunner#split = "10new"`
