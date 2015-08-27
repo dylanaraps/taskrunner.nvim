@@ -1,4 +1,4 @@
-" gulp.nvim
+" taskrunner.nvim
 " by Dylan Araps
 
 if exists("g:loaded_taskrunner")
@@ -33,8 +33,6 @@ endif
 
 " Find Taskrunner {{{
 
-" Looks for a taskrunner in the current file's directory.
-" if no task file is found it then checks up a directory for a task file.
 function! FindTaskRunner()
 	lcd %:p:h
 	let taskrunnerfilelist = ['gulpfile.js', 'gulpfile.coffee', 'gruntfile.js', 'gruntfile.coffee']
