@@ -44,6 +44,17 @@ When left default the plugin will launch the task runners with their default com
 * Gulp: `gulp`
 * Grunt: `grunt`
 
+### Files to look for
+Default: `let g:taskrunner#filelist = ['gulpfile.js', 'gulpfile.coffee', 'gruntfile.js', 'gruntfile.coffee']`
+
+```vimL
+	" Only look for gulpfiles
+	let g:taskrunner#filelist = ['gulpfile.js', 'gulpfile.coffee']
+
+	" Only look for gruntfiles
+	let g:taskrunner#filelist = ['gruntfile.js', 'gruntfile.coffee']
+```
+
 ### Size of the split
 Default: `let g:taskrunner#split = "10new"`
 

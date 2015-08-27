@@ -8,11 +8,15 @@ endif
 let g:loaded_taskrunner = 1
 
 if !exists("g:taskrunner")
-	let g:taskrunner = "auto"
+	let g:taskrunner = " "
 endif
 
 if !exists("g:taskrunner#cmd")
 	let g:taskrunner#cmd = "default"
+endif
+
+if !exists("g:taskrunner#filelist")
+	let g:taskrunner#filelist = ['gulpfile.js', 'gulpfile.coffee', 'gruntfile.js', 'gruntfile.coffee']
 endif
 
 if !exists("g:taskrunner#split")
@@ -35,15 +39,12 @@ endif
 
 function! FindTaskRunner()
 	lcd %:p:h
-	let taskrunnerfilelist = ['gulpfile.js', 'gulpfile.coffee', 'gruntfile.js', 'gruntfile.coffee']
 
 	" Searches using the above list for a task file and goes up a directory
 	" if it fails to find anything.
-	for taskrunnerfile in taskrunnerfilelist
+	for taskrunnerfile in g:taskrunner#filelist
 		let taskrunner = findfile(taskrunnerfile, ".;")
 
-		" If taskrunner isn't blank stop looping.
-		" (This avoids getting multiple results)
 		if taskrunner != ""
 			break
 		endif
@@ -51,7 +52,7 @@ function! FindTaskRunner()
 
 	" findfile() returns the full path, this line uses a regexp to cut away
 	" the path and only show the file name.
-	let taskfile = matchstr(taskrunner, '\(gulp\|grunt\)file\.\(js\|coffee\)')
+	let taskfile = matchstr(taskrunner, '\w*\.\(js\|coffee\)')
 
 	if taskfile == "gulpfile.js" || taskfile == "gulpfile.coffee"
 		let g:taskrunner = "gulp"
