@@ -52,7 +52,7 @@ function! FindTaskRunner()
 
 	" findfile() returns the full path, this line uses a regexp to cut away
 	" the path and only show the file name.
-	let taskfile = matchstr(taskrunner, '\w*\.\(js\|coffee\)')
+	let taskfile = matchstr(taskrunner, '\(gulp\|grunt\)file\.\(js\|coffee\)')
 
 	if taskfile == "gulpfile.js" || taskfile == "gulpfile.coffee"
 		let g:taskrunner = "gulp"
