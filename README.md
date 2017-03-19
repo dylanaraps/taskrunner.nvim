@@ -6,7 +6,8 @@ The plugin by default will look for your gulp/gruntfile in your current working 
 
 The plugin only works with Neovim because it makes use of neovim's built in terminal splits to create the taskrunner split. If installed in regular vim the plugin won't do anything. So it's fine to install in a .vimrc used in both vim/nvim.
 
-![Gulp](https://raw.githubusercontent.com/dylanaraps/taskrunner.nvim/master/screenshots/gulp.png)
+![Gulp](https://i.imgur.com/BywHwPn.png)
+
 
 ## Installation
 
@@ -16,9 +17,12 @@ Use your favorite plugin manager.
   1. Add `Plug 'dylanaraps/taskrunner.nvim'` to your .nvimrc
   2. Run `:PlugInstall`
 
+
 ## Options
 
+
 ### :Task
+
 ```vimL
 	" Command Example
 	" The command on it's own will look in the open file's current working directory.
@@ -33,6 +37,7 @@ Use your favorite plugin manager.
 ```
 
 ### Command to use to launch taskrunner
+
 Default: `let g:taskrunner#cmd = "default"`
 
 ```vimL
@@ -44,7 +49,9 @@ When left default the plugin will launch the task runners with their default com
 * Gulp: `gulp`
 * Grunt: `grunt`
 
+
 ### Files to look for
+
 Default: `let g:taskrunner#filelist = ['gulpfile.js', 'gulpfile.coffee', 'gruntfile.js', 'gruntfile.coffee']`
 
 ```vimL
@@ -55,7 +62,9 @@ Default: `let g:taskrunner#filelist = ['gulpfile.js', 'gulpfile.coffee', 'gruntf
 	let g:taskrunner#filelist = ['gruntfile.js', 'gruntfile.coffee']
 ```
 
+
 ### Size of the split
+
 Default: `let g:taskrunner#split = "10new"`
 
 ```vimL
@@ -68,7 +77,9 @@ Default: `let g:taskrunner#split = "10new"`
 	let g:taskrunner#split = "30vnew"
 ```
 
+
 ### Split Direction
+
 Default: `let g:taskrunner#split_direction = "splitbelow splitright"`
 
 ```vimL
@@ -88,7 +99,9 @@ Default: `let g:taskrunner#split_direction = "splitbelow splitright"`
 
 ```
 
+
 ### Unlisted
+
 Default: `let g:taskrunner#unlisted = 1`
 
 ```vimL
@@ -96,7 +109,9 @@ Default: `let g:taskrunner#unlisted = 1`
 	let g:taskrunner#unlisted = 1
 ```
 
+
 ### Focus On Open
+
 Default: `let g:taskrunner#focus_on_open = 0`
 
 ```vimL
