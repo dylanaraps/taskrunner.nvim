@@ -4,7 +4,7 @@
 " license: mit license
 "=============================================================
 
-if exists("g:loaded_taskrunner") || !has('nvim')
+if exists('g:loaded_taskrunner') || !has('nvim')
 	finish
 endif
 let g:loaded_taskrunner = 1

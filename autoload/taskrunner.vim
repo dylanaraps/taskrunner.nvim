@@ -19,24 +19,24 @@ function! taskrunner#FindTaskRunner()
 
 	" Searches using the above list for a task file and goes up a directory
 	" if it fails to find anything.
-	for taskrunnerfile in g:taskrunner#filelist
-		let taskrunner = findfile(taskrunnerfile, ".;")
+	for l:taskrunnerfile in g:taskrunner#filelist
+		let l:taskrunner = findfile(l:taskrunnerfile, '.;')
 
-		if taskrunner != ""
+		if l:taskrunner !=? ''
 			break
 		endif
 	endfor
 
 	" findfile() returns the full path, this line uses a regexp to cut away
 	" the path and only show the file name.
-	let taskfile = matchstr(taskrunner, '\(gulp\|grunt\)file\.\(js\|coffee\)')
+	let l:taskfile = matchstr(l:taskrunner, '\(gulp\|grunt\)file\.\(js\|coffee\)')
 
-	if taskfile == "gulpfile.js" || taskfile == "gulpfile.coffee"
-		let g:taskrunner = "gulp"
-	elseif taskfile == "gruntfile.js" || taskfile == "gruntfile.coffee"
-		let g:taskrunner = "grunt"
+	if l:taskfile ==? 'gulpfile.js' || l:taskfile ==? 'gulpfile.coffee'
+		let g:taskrunner = 'gulp'
+	elseif l:taskfile ==? 'gruntfile.js' || l:taskfile ==? 'gruntfile.coffee'
+		let g:taskrunner = 'grunt'
 	else
-		let g:taskrunner = "none"
+		let g:taskrunner = 'none'
 	endif
 endfunction
 
@@ -47,17 +47,17 @@ endfunction
 function! taskrunner#RunTask(command)
     call taskrunner#FindTaskRunner()
 
-    if g:taskrunner == "none"
-        echom "No taskrunner file found"
-        echom "You can also point to the file like so :Task --gulpfile path/to/gulpfile.js task"
+    if g:taskrunner ==? 'none'
+        echom 'No taskrunner file found'
+        echom 'You can also point to the file like so :Task --gulpfile path/to/gulpfile.js task'
     else
-        execute "setlocal" . " " . g:taskrunner#split_direction
+        execute 'setlocal' . ' ' . g:taskrunner#split_direction
         execute g:taskrunner#split
 
-        if g:taskrunner#cmd == "default"
-            call termopen(g:taskrunner . " " . a:command)
+        if g:taskrunner#cmd ==? 'default'
+            call termopen(g:taskrunner . ' ' . a:command)
         else
-            call termopen(g:taskrunner#cmd . " " . a:command)
+            call termopen(g:taskrunner#cmd . ' ' . a:command)
         endif
 
         if g:taskrunner#unlisted == 1
